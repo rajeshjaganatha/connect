@@ -53,17 +53,13 @@ public class QueryDAOImpl implements QueryDAO
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<LeaveTypeSummaryBean> searchBookmarks(){
-		List<LeaveTypeSummaryBean> leaveObjectList =new ArrayList<LeaveTypeSummaryBean>();
+	public List<LeaveType> searchBookmarks(){
+		List<LeaveType> leaveObjectList =new ArrayList<LeaveType>();
 			Session session=sessionFactory.getCurrentSession();
-			Criteria crit = session.createCriteria(LeaveTypeSummaryBean.class, "lt");
-			//crit.createCriteria("leaveSummary", "ls");
-			//crit.setFetchMode("LeaveSummary", FetchMode.JOIN);
-			//crit.add(Restrictions.eq("lt.available", "LT.ALLOTMENT-SUM(LS.LEAVE_AVAILED)"));
-			
-			//crit.add( Restrictions.eqProperty("lt.leaveTypeId", "ls.leaveTypeId") );
+			Criteria crit = session.createCriteria(LeaveType.class);
+
 					
-			leaveObjectList=(List<LeaveTypeSummaryBean>)crit.list();
+			leaveObjectList=(List<LeaveType>)crit.list();
 			/*Query query = session.createQuery("SELECT DISTINCT LT.leaveTypeId,  LT.leaveType, LT.allotment,"+
 			"LT.allotment-SUM(LS.leaveAvailed) as available "+
 			"FROM LeaveType LT, LeaveSummary LS WHERE LS.leaveTypeId = LT.leaveTypeId GROUP BY LT.leaveTypeId,LT.leaveType,LT.allotment");

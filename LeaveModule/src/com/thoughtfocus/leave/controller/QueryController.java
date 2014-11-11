@@ -89,7 +89,7 @@ public class QueryController {
 	public String validateUser(@ModelAttribute("queryBean") @Valid QueryBean queryBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
 		
 			bookmarkFormValidator.validate(queryBean, result);
-			List<LeaveTypeSummaryBean> queryResult = null;
+			List<LeaveType> queryResult = null;
 			
 			if (result.hasErrors()) {
 				logger.info("Validation errors logging in");
@@ -102,6 +102,7 @@ public class QueryController {
 					logger.debug(queryBean.getUserName()+" just logged in");
 					System.out.println("User logged in");
 					queryResult = queryManager.searchBookmarks();
+
 				}else{
 					model.addAttribute(QueryConstants.USER_ERROR_MSG, QueryConstants.ERROR_MSG_LOGIN_FAILED);
 					logger.debug(queryBean.getUserName()+" could not get in");
@@ -141,18 +142,13 @@ public class QueryController {
 	@RequestMapping(value="/applyLeave", method=RequestMethod.POST)
 	public String applyLeave(@ModelAttribute("leaveBean") @Valid LeaveBean leaveBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
 		
-		List<LeaveTypeSummaryBean> queryResult = null;
+		List<LeaveType> queryResult = null;
 		
 		if (result.hasErrors()) {
 			logger.info("Validation errors applying leave");
 			try {
 				queryResult = queryManager.searchBookmarks();
-				List<LeaveBean> leaveBeansList  = new ArrayList<LeaveBean>();
-				for(LeaveTypeSummaryBean leaveTypeSummaryBean : queryResult){
-					LeaveBean leaveBeanObj =new LeaveBean();
-					BeanUtils.copyProperties(leaveBeanObj, leaveTypeSummaryBean);
-					leaveBeansList.add(leaveBeanObj);
-				}
+
 				
 			} catch (Exception e) {
 				e.printStackTrace();

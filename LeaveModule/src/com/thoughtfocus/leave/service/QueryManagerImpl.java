@@ -33,8 +33,8 @@ public class QueryManagerImpl implements QueryManager{
 	 * @return
 	 */
 	@Override
-	public List<LeaveTypeSummaryBean> searchBookmarks() throws HibernateException,Exception{
-		List<LeaveTypeSummaryBean> result = new ArrayList<LeaveTypeSummaryBean>();
+	public List<LeaveType> searchBookmarks() throws HibernateException,Exception{
+		List<LeaveType> result = new ArrayList<LeaveType>();
 		
 		result=queryDAO.searchBookmarks();
 		return result;

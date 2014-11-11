@@ -24,7 +24,7 @@ public interface QueryManager {
 	 * @param tagFilter
 	 * @return
 	 */
-	public List<LeaveTypeSummaryBean> searchBookmarks() throws Exception;
+	public List<LeaveType> searchBookmarks() throws Exception;
 
 	public User validateUser(QueryBean queryBean) throws Exception;
 	

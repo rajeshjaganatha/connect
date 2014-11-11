@@ -23,7 +23,7 @@ public interface QueryDAO
 	 * @param tagFilter
 	 * @return
 	 */
-	public List<LeaveTypeSummaryBean> searchBookmarks();
+	public List<LeaveType> searchBookmarks();
 	
 	public List<HolidayList> holidayList();
 
