@@ -1,7 +1,5 @@
 package com.thoughtfocus.leave.formbean;
 
-import java.util.Date;
-
 
 /**
  * The bean carrying the bookmark details to be shown to the end user

@@ -1,21 +1,12 @@
 package com.thoughtfocus.leave.controller;
 
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thoughtfocus.leave.constants.QueryConstants;
 import com.thoughtfocus.leave.domain.HolidayList;
-import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
-import com.thoughtfocus.leave.formbean.LeaveTypeSummaryBean;
 import com.thoughtfocus.leave.formbean.QueryBean;
 import com.thoughtfocus.leave.service.QueryManager;
 import com.thoughtfocus.leave.validator.BookmarkFormValidator;
@@ -157,9 +146,9 @@ public class QueryController {
 			return "QueryResults";
 		}
 		try {
-			@SuppressWarnings("unused")
+
 			User user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
-			LeaveSummary addLeave = queryManager.applyLeave(leaveBean,user);
+			queryManager.applyLeave(leaveBean,user);
 			} catch (Exception e) {
 			e.printStackTrace();
 			}

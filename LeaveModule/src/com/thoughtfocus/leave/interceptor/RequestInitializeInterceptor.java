@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.thoughtfocus.leave.constants.QueryConstants;
-import com.thoughtfocus.leave.controller.QueryController;
 import com.thoughtfocus.leave.domain.User;
 
 public class RequestInitializeInterceptor extends HandlerInterceptorAdapter{

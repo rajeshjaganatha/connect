@@ -2,14 +2,11 @@ package com.thoughtfocus.leave.service;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
-
 import com.thoughtfocus.leave.domain.HolidayList;
 import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
-import com.thoughtfocus.leave.formbean.LeaveTypeSummaryBean;
 import com.thoughtfocus.leave.formbean.QueryBean;
 
 /**

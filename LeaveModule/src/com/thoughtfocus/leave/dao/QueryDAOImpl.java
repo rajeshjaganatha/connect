@@ -1,36 +1,25 @@
 package com.thoughtfocus.leave.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
-import org.junit.experimental.categories.Categories;
-import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.thoughtfocus.leave.domain.HolidayList;
 import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
-import com.thoughtfocus.leave.formbean.LeaveTypeSummaryBean;
 import com.thoughtfocus.leave.formbean.QueryBean;
 
 /**
@@ -46,8 +35,6 @@ public class QueryDAOImpl implements QueryDAO
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	private static final Logger logger = Logger.getLogger(QueryDAO.class); 
-
 	/**
 	 * Get All Bookmarks
 	 * @return

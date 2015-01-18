@@ -1,7 +1,5 @@
 package com.thoughtfocus.leave.test;
 
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +12,7 @@ import org.springframework.test.AbstractTransactionalDataSourceSpringContextTest
 import com.thoughtfocus.leave.dao.QueryDAO;
 import com.thoughtfocus.leave.dao.QueryDAOImpl;
 
+@SuppressWarnings("unused")
 @RunWith(MockitoJUnitRunner.class)
 public class QueryDAOTest extends AbstractTransactionalDataSourceSpringContextTests  {
 
@@ -44,11 +43,11 @@ public class QueryDAOTest extends AbstractTransactionalDataSourceSpringContextTe
  
     @Test
 	public void searchBookmarksIfSessionIsNull() {
-		QueryDAOImpl b = new QueryDAOImpl();
+		//QueryDAOImpl b = new QueryDAOImpl();
 
 		Mockito.when(sessionFactory.getCurrentSession()).thenReturn(null);
-		List<Object> myList = b.searchBookmarks("select * from t_tags");
-		System.out.println(myList);
+/*		List<LeaveType> myList = b.searchBookmarks("select * from t_tags");
+		System.out.println(myList);*/
 	}
     
     /*@Test

@@ -5,9 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.thoughtfocus.leave.formbean.LeaveBean;
-import com.thoughtfocus.leave.formbean.QueryBean;
-
 /**
  * Validator class to handle bookmark validations
  * @author manaswita.mishra
@@ -31,7 +28,6 @@ public class BookmarkFormValidator implements Validator
 	@Override
 	public void validate(Object model, Errors errors)
 	{
-		QueryBean queryBean=(QueryBean) model;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName","required.userName", "User Name is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password","required.password", "Password is required.");
 					
