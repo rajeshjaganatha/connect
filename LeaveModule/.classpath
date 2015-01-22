@@ -44,11 +44,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sqljdbc4-3.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="D:/Coding/Java/Querylite/LeaveModule/WebContent/WEB-INF/lib/httpcomponents-client-4.3.4-src.zip">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcomponents-client-4.3.4-src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

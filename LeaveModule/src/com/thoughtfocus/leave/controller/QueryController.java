@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thoughtfocus.leave.constants.QueryConstants;
 import com.thoughtfocus.leave.domain.HolidayList;
+import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
@@ -148,10 +149,13 @@ public class QueryController {
 		try {
 
 			User user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
-			queryManager.applyLeave(leaveBean,user);
+			List<LeaveSummary> applyleave =  (List<LeaveSummary>) queryManager.applyLeave(leaveBean,user);
 			} catch (Exception e) {
 			e.printStackTrace();
+			} catch (){
+				
 			}
+		
 		
 		
 		try {

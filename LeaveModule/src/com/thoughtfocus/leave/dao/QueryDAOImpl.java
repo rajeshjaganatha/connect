@@ -9,6 +9,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -85,18 +87,41 @@ public class QueryDAOImpl implements QueryDAO
 	@Override
 	public LeaveSummary applyLeave(LeaveBean leaveBean, User user) throws Exception{
 		Session session=sessionFactory.getCurrentSession();
-		LeaveSummary addleave = new LeaveSummary();
-		addleave.setUserId(user.getUserId());
-		addleave.setLeaveTypeId(leaveBean.getLeaveTypeId());
-		addleave.setLeaveAvailed(leaveBean.getLeaveAvailed());
-		addleave.setFromDate(stringtoDate(leaveBean.getFromdate()));	
-		addleave.setToDate(stringtoDate(leaveBean.getTodate()));
-		session.save(addleave);
-		
-		return addleave;
+		int count = checkexistingleave(stringtoDate(leaveBean.getFromdate()), stringtoDate(leaveBean.getTodate()), user);
+		if (count==0) {
+
+			LeaveSummary addleave = new LeaveSummary();
+			addleave.setUserId(user.getUserId());
+			addleave.setLeaveTypeId(leaveBean.getLeaveTypeId());
+			addleave.setLeaveAvailed(leaveBean.getLeaveAvailed());
+			addleave.setFromDate(stringtoDate(leaveBean.getFromdate()));	
+			addleave.setToDate(stringtoDate(leaveBean.getTodate()));
+			session.save(addleave);
+			
+			return addleave;	
+		} else {
+		return null;	
+		}
+			
 		
 	}
 	
+	public int checkexistingleave(Date fromDate, Date toDate, User user) {
+		/*SELECT COUNT(USER_ID) 
+		  FROM T_LEAVE_SUMMARY WHERE 
+		  ('2014-01-15'<=TO_DATE) and ('2014-01-16'>=FROM_DATE) 
+		  and USER_ID=1;*/
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(LeaveSummary.class);
+		criteria.add(Restrictions.le("toDate", fromDate));
+		criteria.add(Restrictions.ge("fromDate", toDate));
+		criteria.add(Restrictions.eq("userId", user.getUserId()));
+		
+		List<LeaveSummary> list = criteria.list();
+		int count = list.size();
+		return count;
+		
+	}
+
 	public Date stringtoDate(String dateasString) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
