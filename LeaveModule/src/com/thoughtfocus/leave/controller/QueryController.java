@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -129,6 +131,7 @@ public class QueryController {
 		return new ModelAndView("UserLogin", "queryBean", queryBean);
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/applyLeave", method=RequestMethod.POST)
 	public String applyLeave(@ModelAttribute("leaveBean") @Valid LeaveBean leaveBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
 		
@@ -138,9 +141,7 @@ public class QueryController {
 			logger.info("Validation errors applying leave");
 			try {
 				queryResult = queryManager.searchBookmarks();
-
-				
-			} catch (Exception e) {
+				} catch (Exception e) {
 				e.printStackTrace();
 			}
 			map.put("queryResults", queryResult);
@@ -149,14 +150,32 @@ public class QueryController {
 		try {
 
 			User user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
+			@SuppressWarnings("unchecked")
 			List<LeaveSummary> applyleave =  (List<LeaveSummary>) queryManager.applyLeave(leaveBean,user);
+			ValidationUtils.rejectIfEmptyOrWhitespace(result, "todate","required.userName", "User Name is required.");
 			} catch (Exception e) {
 			e.printStackTrace();
-			} catch (){
-				
 			}
-		
-		
+		System.out.println("applyleave");
+		if (result == null) {
+			
+				System.out.println("Check");
+				ValidationUtils.rejectIfEmptyOrWhitespace(result, "todate","required.userName", "User Name is required.");
+				//ValidationUtils.rejectIfEmptyOrWhitespace(result, "password","");
+							
+			
+			logger.info("Validation errors applying leave");
+			try {
+				queryResult = queryManager.searchBookmarks();
+
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			map.put("queryResults", queryResult);
+			
+			return "QueryResults";
+		}
 		
 		try {
 			queryResult = queryManager.searchBookmarks();

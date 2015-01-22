@@ -93,7 +93,7 @@ function getSubmitLeaveReport(){
 
 	
 <form:form action="applyLeave.do" method="post" commandName="BookmarkList" modelAttribute="leaveBean">	
-
+<td align="left"><form:errors path="todate" cssStyle="color:red"></form:errors></td>
 <table>
 <tr style="width: 454px; ">
 
