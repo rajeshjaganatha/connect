@@ -1,5 +1,0 @@
-INDEX VERSION 1.126
-D:\Coding\Java\Connect\connect\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4020766882.index
-\LeaveModule\src
-D:\Coding\Java\Connect\connect\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1614554741.index
-\LeaveModule\src

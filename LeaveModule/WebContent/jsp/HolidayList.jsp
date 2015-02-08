@@ -17,10 +17,10 @@
 </head>
 <body>
 <div class="title">Leave</div>
-<tr>
-<td><a href="#" title="LogOut" onclick="javascript:go('logout.do');" class="button_example">LOGOUT</a></td>
+
+<a href="#" title="LogOut" onclick="javascript:go('logout.do');" class="button_example">LOGOUT</a>
 <a href="javascript:history.go(-1)">Go Back</a>
-</tr>
+
 <br>
 <br>
 <table cellspacing="1" cellpadding="4" border="1">

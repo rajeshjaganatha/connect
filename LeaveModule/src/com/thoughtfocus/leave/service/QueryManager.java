@@ -26,6 +26,8 @@ public interface QueryManager {
 	public User validateUser(QueryBean queryBean) throws Exception;
 	
 	public LeaveSummary applyLeave(LeaveBean leaveBean, User user) throws Exception;
+	
+	//public int applyLeave(LeaveBean leaveBean, User user) throws Exception;
 
 	public List<HolidayList> holidayList() throws Exception;
 

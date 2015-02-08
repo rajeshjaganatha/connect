@@ -1,6 +1,0 @@
-127.0.0.1 - - [19/Jan/2015:10:34:13 +0530] "GET / HTTP/1.1" 404 955
-0:0:0:0:0:0:0:1 - - [19/Jan/2015:10:34:15 +0530] "GET /LeaveModule/ HTTP/1.1" 200 141
-0:0:0:0:0:0:0:1 - - [19/Jan/2015:10:34:15 +0530] "GET /LeaveModule/userLogin.do HTTP/1.1" 200 1386
-0:0:0:0:0:0:0:1 - - [19/Jan/2015:10:34:26 +0530] "POST /LeaveModule/validateUser.do HTTP/1.1" 200 5262
-0:0:0:0:0:0:0:1 - - [19/Jan/2015:10:34:26 +0530] "GET /LeaveModule/js/calendar.js HTTP/1.1" 304 -
-0:0:0:0:0:0:0:1 - - [19/Jan/2015:10:34:59 +0530] "POST /LeaveModule/applyLeave.do HTTP/1.1" 200 5262
