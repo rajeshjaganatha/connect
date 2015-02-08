@@ -33,7 +33,12 @@ public class BookmarkFormValidator implements Validator
 					
 	}
 	
-	
+	public void validateLeave(Object model, Errors errors)
+	{
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fromdate","required.fromdate", "From Date is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "todate","required.todate", "To Date is required.");
+					
+	}
 	
 
 

@@ -25,6 +25,8 @@ public interface QueryDAO
 	public List<LeaveType> searchBookmarks();
 	
 	public List<HolidayList> holidayList();
+	
+	public List<LeaveSummary> leaveSummary(User user);
 
 	public User validateUser(QueryBean queryBean) throws Exception;
 	

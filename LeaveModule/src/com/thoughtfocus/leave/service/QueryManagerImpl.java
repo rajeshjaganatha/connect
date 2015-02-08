@@ -34,34 +34,36 @@ public class QueryManagerImpl implements QueryManager{
 	@Override
 	public List<LeaveType> searchBookmarks() throws HibernateException,Exception{
 		List<LeaveType> result = new ArrayList<LeaveType>();
-		
 		result=queryDAO.searchBookmarks();
 		return result;
 	}
 	
 	@Override
 	public List<HolidayList> holidayList() throws HibernateException,Exception{
-		List<HolidayList> result = new ArrayList<HolidayList>();
-		
-		result=queryDAO.holidayList();
-		return result;
+		List<HolidayList> holidaylist = new ArrayList<HolidayList>();
+		holidaylist=queryDAO.holidayList();
+		return holidaylist;
 	}
 	
 	@Override
 	public User validateUser(QueryBean queryBean) throws Exception{
-		
 		User user=queryDAO.validateUser(queryBean);
-		
 		return user;
 		
 	}
 	
 	@Override
 	public LeaveSummary applyLeave (LeaveBean leaveBean, User user) throws Exception{
-		
 		LeaveSummary addLeave=queryDAO.applyLeave(leaveBean, user);
-		
 		return addLeave;
+		
+	}
+
+	@Override
+	public List<LeaveSummary> leaveSummary(User user) throws Exception {
+		List<LeaveSummary> leavesummary = new ArrayList<LeaveSummary>();
+		leavesummary=queryDAO.leaveSummary(user);
+		return leavesummary;		
 		
 	}
 

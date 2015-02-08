@@ -133,6 +133,7 @@ public class QueryController {
 	@RequestMapping(value="/applyLeave", method=RequestMethod.POST)
 	public String applyLeave(@ModelAttribute("leaveBean") @Valid LeaveBean leaveBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
 		
+		bookmarkFormValidator.validateLeave(leaveBean, result);
 		List<LeaveType> queryResult = null;
 		
 		if (result.hasErrors()) {
@@ -149,10 +150,10 @@ public class QueryController {
 
 			User user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
 			LeaveSummary applyleave =  queryManager.applyLeave(leaveBean,user);
-			/*int applyleave =  queryManager.applyLeave(leaveBean,user);
-			if (applyleave != 0) {
-				System.out.println(applyleave);
-			}*/
+
+			if (null==applyleave) {
+			model.addAttribute(QueryConstants.USER_ERROR_MSG, QueryConstants.ERROR_MSG_APPLY_LEAVE_FAILED);
+			}
 			} catch (Exception e) {
 			e.printStackTrace();
 			}
@@ -183,5 +184,19 @@ public class QueryController {
 		
 	}
 	
+	@RequestMapping(value="/leavesummary", method=RequestMethod.GET)
+	public String leavesummary(@ModelAttribute("queryBean") @Valid QueryBean queryBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
+		User user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
+		List<LeaveSummary> leavesummary = null;
+		try {
+			leavesummary = queryManager.leaveSummary(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		map.put("leaveSummary", leavesummary);
+		return "LeaveSummary";
+		
+	}
 
 }

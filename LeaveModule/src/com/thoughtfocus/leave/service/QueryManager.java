@@ -27,9 +27,9 @@ public interface QueryManager {
 	
 	public LeaveSummary applyLeave(LeaveBean leaveBean, User user) throws Exception;
 	
-	//public int applyLeave(LeaveBean leaveBean, User user) throws Exception;
-
 	public List<HolidayList> holidayList() throws Exception;
+	
+	public List<LeaveSummary> leaveSummary(User user) throws Exception;
 
 
 

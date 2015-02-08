@@ -1,12 +1,13 @@
 package com.thoughtfocus.leave.domain;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.*;
+
+import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * The User domain object to represent one user
@@ -21,15 +22,19 @@ public class User implements Serializable
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="USER_ID")
+	@Column(name="USER_ID", unique = true)
 	private int userId;
+	
+
+	
 	
 	@Column(name="USER_NAME")	
 	private String userName;
 	
 	@Column(name="PASSWORD")	
 	private String password;
-
+	
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -54,6 +59,21 @@ public class User implements Serializable
 		this.password = password;
 	}
 	
+	
+	
+	public LeaveSummary getLeavesummary() {
+		return leavesummary;
+	}
+
+	public void setLeavesummary(LeaveSummary leavesummary) {
+		this.leavesummary = leavesummary;
+	}
+
+
+
+	@PrimaryKeyJoinColumn
+    @ManyToMany(mappedBy = "User")
+	private LeaveSummary leavesummary;
 	
 
 }

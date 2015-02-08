@@ -7,7 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 /**
  * The User domain object to represent one user
@@ -38,7 +43,21 @@ public class LeaveSummary implements Serializable
 
 	@Column(name="TO_DATE")	
 	private Date toDate;
+
 	
+	    @ManyToOne(fetch = "LeaveSummary")
+	    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+	    private User user;
+	    
+	    
+	public User getUser() {
+			return user;
+		}
+
+		public void setUser(User user) {
+			this.user = user;
+		}
+
 	public int getLeaveSummaryId() {
 		return leaveSummaryId;
 	}
@@ -72,6 +91,7 @@ public class LeaveSummary implements Serializable
 	}
 
 	public Date getFromDate() {
+		
 		return fromDate;
 	}
 

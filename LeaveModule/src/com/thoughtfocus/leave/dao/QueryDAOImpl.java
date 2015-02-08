@@ -3,12 +3,16 @@ package com.thoughtfocus.leave.dao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -66,6 +70,37 @@ public class QueryDAOImpl implements QueryDAO
 		return holidayObjectList;
 }
 
+	@SuppressWarnings("unchecked")
+	public List<LeaveSummary>  leaveSummary(User user){
+		
+		List<LeaveSummary> leavesummary =new ArrayList<LeaveSummary>();
+			Session session=sessionFactory.getCurrentSession();
+			Criteria crit =session.createCriteria(LeaveSummary.class);
+			crit.add(Restrictions.eq("userId", user.getUserId()));
+			leavesummary=(List<LeaveSummary>)crit.list();
+						
+		
+		
+		
+		
+		Criteria criteria = session.createCriteria(LeaveSummary.class, "leavesummary");
+        criteria.setFetchMode("leavesummary.user", FetchMode.JOIN);
+        criteria.createAlias("leavesummary.user", "user"); // inner join by default
+ 
+        ProjectionList columns = Projections.projectionList()
+                        .add(Projections.property("user.userName"))
+                        .add(Projections.property("leaveAvailed"));
+        criteria.setProjection(columns);
+ 
+        List<Object[]> list = criteria.list();
+        for(Object[] arr : list){
+            System.out.println(Arrays.toString(arr));
+        }
+		
+		
+        return leavesummary;
+		
+}
 	@Override
 	public User validateUser(QueryBean queryBean) throws Exception{
 
@@ -95,8 +130,8 @@ public class QueryDAOImpl implements QueryDAO
 			addleave.setFromDate(stringtoDate(leaveBean.getFromdate()));	
 			addleave.setToDate(stringtoDate(leaveBean.getTodate()));
 			session.save(addleave);
-			
 			return addleave;	
+
 		} else {
 			
 		return null;	
@@ -112,12 +147,13 @@ public class QueryDAOImpl implements QueryDAO
 		  and USER_ID=1;*/
 		List<LeaveSummary> list =new ArrayList<LeaveSummary>();
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(LeaveSummary.class);
-		criteria.add(Restrictions.le("toDate", fromDate));
-		criteria.add(Restrictions.ge("fromDate", toDate));
+		criteria.add(Restrictions.ge("toDate", fromDate));
+		criteria.add(Restrictions.le("fromDate", toDate));
 		criteria.add(Restrictions.eq("userId", user.getUserId()));
 		
 		list = (List<LeaveSummary>) criteria.list();
 		int count = list.size();
+		System.out.println(count);
 		return count;
 		
 	}

@@ -1,6 +1,9 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page import="java.io.*,java.util.*" %>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@include file="taglib_includes.jsp"%>
 <html>
@@ -13,10 +16,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-
 </head>
 <body>
-<div class="title">Holiday List</div>
+<div class="title">Leave Summary</div>
 
 <a href="#" title="LogOut" onclick="javascript:go('logout.do');" class="button_example">LOGOUT</a>
 <a href="javascript:history.go(-1)">Go Back</a>
@@ -25,20 +27,20 @@
 <br>
 <table cellspacing="1" cellpadding="4" border="1">
 	<c:choose>
-		<c:when  test="${!empty holidayList}">
+		<c:when  test="${!empty leaveSummary}">
 			<tr>
-			<td>Serial Number 	<c:out value="${i.holidayId}"/></td>
-			<td>Holiday Name	<c:out value="${i.holidayName}"/></td>
-			<td>Date			<c:out value="${i.date}"/> </td>
-			<td>Day				<c:out value="${i.day}"/> </td>
+			<td>Leave Type		<c:out value="${i.leaveTypeId}"/></td>
+			<td>From Date		<c:out value="${i.fromDate}"/> </td>
+			<td>To Date			<c:out value="${i.toDate}"/> </td>
+			<td>Leave Availed	<c:out value="${i.leaveAvailed}"/> </td>
 			</tr>		
 		
-			<c:forEach items="${holidayList}" var="i"  varStatus="loopStatus">
+			<c:forEach items="${leaveSummary}" var="i"  varStatus="loopStatus">
 			<tr>
-			<td><c:out value="${i.holidayId}"/></td>
-			<td><c:out value="${i.holidayName}"/></td>
-			<td><c:out value="${i.date}"/> </td>
-			<td><c:out value="${i.day}"/> </td>
+			<td><c:out value="${i.leaveTypeId}"/></td>
+    		<td><c:out value="${i.fromDate}"/> </td>
+			<td><c:out value="${i.toDate}"/> </td>
+			<td><c:out value="${i.leaveAvailed}"/> </td>
 			</tr>
 
 			</c:forEach> 
