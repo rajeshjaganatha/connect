@@ -75,9 +75,9 @@ public class QueryDAOImpl implements QueryDAO
 		
 		List<LeaveSummary> leavesummary =new ArrayList<LeaveSummary>();
 			Session session=sessionFactory.getCurrentSession();
-			Criteria crit =session.createCriteria(LeaveSummary.class);
+/*			Criteria crit =session.createCriteria(LeaveSummary.class);
 			crit.add(Restrictions.eq("userId", user.getUserId()));
-			leavesummary=(List<LeaveSummary>)crit.list();
+			leavesummary=(List<LeaveSummary>)crit.list();*/
 						
 		
 		

@@ -2,11 +2,15 @@ package com.thoughtfocus.leave.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -24,9 +28,7 @@ import org.hibernate.annotations.Cascade;
 public class LeaveSummary implements Serializable
 {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ID")
+
 	private int leaveSummaryId;
 	
 	@Column(name="USER_ID")
@@ -44,20 +46,13 @@ public class LeaveSummary implements Serializable
 	@Column(name="TO_DATE")	
 	private Date toDate;
 
+	private List<LeaveType> leavetype;
 	
-	    @ManyToOne(fetch = "LeaveSummary")
-	    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-	    private User user;
-	    
-	    
-	public User getUser() {
-			return user;
-		}
 
-		public void setUser(User user) {
-			this.user = user;
-		}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID")
 	public int getLeaveSummaryId() {
 		return leaveSummaryId;
 	}
@@ -105,6 +100,16 @@ public class LeaveSummary implements Serializable
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "leaveTypeId", insertable = false, updatable = false)
+	public List<LeaveType> getLeavetype() {
+		return leavetype;
+	}
+
+	public void setLeavetype(List<LeaveType> leavetype) {
+		this.leavetype = leavetype;
 	}
 
 	private static final long serialVersionUID = 1L;
