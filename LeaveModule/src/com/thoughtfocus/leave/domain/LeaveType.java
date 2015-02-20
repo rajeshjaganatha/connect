@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -26,27 +27,32 @@ public class LeaveType implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal leaveTypeId;
 	
-	@Column(name="LEAVE_TYPE")	
+	private int leaveTypeId;
+	
+		
 	private String leaveType;
 	
-	@Column(name="ALLOTMENT")	
+		
 	private int allotment;
+	
+	@Transient
+	private int availed;
 	
 	private List<LeaveSummary> leavesummary;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="LEAVE_TYPE_ID")
-	public BigDecimal getLeaveTypeId() {
+	public int getLeaveTypeId() {
 		return leaveTypeId;
 	}
 
-	public void setLeaveTypeId(BigDecimal leaveTypeId) {
+	public void setLeaveTypeId(int leaveTypeId) {
 		this.leaveTypeId = leaveTypeId;
 	}
 
+	@Column(name="LEAVE_TYPE")
 	public String getLeaveType() {
 		return leaveType;
 	}
@@ -55,6 +61,7 @@ public class LeaveType implements Serializable
 		this.leaveType = leaveType;
 	}
 
+	@Column(name="ALLOTMENT")
 	public int getAllotment() {
 		return allotment;
 	}
@@ -70,6 +77,15 @@ public class LeaveType implements Serializable
 
 	public void setLeavesummary(List<LeaveSummary> leavesummary) {
 		this.leavesummary = leavesummary;
+	}
+
+	@Transient
+	public int getAvailed() {
+		return availed;
+	}
+
+	public void setAvailed(int availed) {
+		this.availed = availed;
 	}
 	
 }

@@ -71,12 +71,11 @@ function getSubmitLeaveReport(){
 		<c:choose>
 			<c:when test="${!empty queryResults}">
 				<tr>
-					<td>Serial Number <c:out value="${i.leaveTypeId}" /></td>
-					<td>Leave Type <c:out value="${i.leaveType}" /></td>
-					<td>Allotment <c:out value="${i.allotment}" />
-					</td>
-					<%--  		<td>Availed			<c:out value="${i.availed}"/> </td>
-			<td>Available		<c:out value="${i.available}"/> </td> --%>
+					<td>Serial Number	 <c:out value="${i.leaveTypeId}" /></td>
+					<td>Leave Type		 <c:out value="${i.leaveType}" /></td>
+					<td>Allotment		 <c:out value="${i.allotment}" /></td>
+					<td>Availed			 <c:out value="${i.availed}"/> </td>
+			<%--<td>Available		<c:out value="${i.available}"/> </td> --%>
 				</tr>
 
 				<c:forEach items="${queryResults}" var="i" varStatus="loopStatus">
@@ -84,8 +83,8 @@ function getSubmitLeaveReport(){
 						<td><c:out value="${i.leaveTypeId}" /></td>
 						<td><c:out value="${i.leaveType}" /></td>
 						<td><c:out value="${i.allotment}" /></td>
-						<%--  			<td><c:out value="${i.availed}"/> </td>
-			<td><c:out value="${i.available}"/> </td> --%>
+						<td><c:out value="${i.availed}"/> </td>
+			<%-- <td><c:out value="${i.available}"/> </td> --%>
 					</tr>
 
 				</c:forEach>

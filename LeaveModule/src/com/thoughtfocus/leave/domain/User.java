@@ -22,10 +22,8 @@ public class User implements Serializable
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="USER_ID", unique = true)
+	@Column(name="USER_ID")
 	private int userId;
-	
-
 	
 	
 	@Column(name="USER_NAME")	
@@ -60,20 +58,4 @@ public class User implements Serializable
 	}
 	
 	
-	
-	public LeaveSummary getLeavesummary() {
-		return leavesummary;
-	}
-
-	public void setLeavesummary(LeaveSummary leavesummary) {
-		this.leavesummary = leavesummary;
-	}
-
-
-
-	@PrimaryKeyJoinColumn
-    @ManyToMany(mappedBy = "User")
-	private LeaveSummary leavesummary;
-	
-
 }

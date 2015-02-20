@@ -2,8 +2,8 @@ package com.thoughtfocus.leave.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,28 +29,30 @@ import org.hibernate.annotations.Cascade;
 public class LeaveSummary implements Serializable
 {
 	
-
 	private int leaveSummaryId;
 	
-	@Column(name="USER_ID")
+	private int leaveAvailed;
+
+	private Date fromDate;
+	
+	private Date toDate;
+		
 	private int userId;
 	
-	@Column(name="LEAVE_TYPE_ID")	
+	private LeaveType leavetype;
+	
 	private int leaveTypeId;
 	
-	@Column(name="LEAVE_AVAILED")	
-	private int leaveAvailed;
 	
-	@Column(name="FROM_DATE")	
-	private Date fromDate;
+	@Column(name="LEAVE_TYPE_ID")
+	public int getLeaveTypeId() {
+		return leaveTypeId;
+	}
 
-	@Column(name="TO_DATE")	
-	private Date toDate;
-
-	private List<LeaveType> leavetype;
+	public void setLeaveTypeId(int leaveTypeId) {
+		this.leaveTypeId = leaveTypeId;
+	}
 	
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="ID")
@@ -61,6 +64,7 @@ public class LeaveSummary implements Serializable
 		this.leaveSummaryId = leaveSummaryId;
 	}
 
+	@Column(name="USER_ID")
 	public int getUserId() {
 		return userId;
 	}
@@ -69,14 +73,8 @@ public class LeaveSummary implements Serializable
 		this.userId = userId;
 	}
 
-	public int getLeaveTypeId() {
-		return leaveTypeId;
-	}
 
-	public void setLeaveTypeId(int leaveTypeId) {
-		this.leaveTypeId = leaveTypeId;
-	}
-
+	@Column(name="LEAVE_AVAILED")
 	public int getLeaveAvailed() {
 		return leaveAvailed;
 	}
@@ -85,8 +83,8 @@ public class LeaveSummary implements Serializable
 		this.leaveAvailed = leaveAvailed;
 	}
 
+	@Column(name="FROM_DATE")
 	public Date getFromDate() {
-		
 		return fromDate;
 	}
 
@@ -94,6 +92,7 @@ public class LeaveSummary implements Serializable
 		this.fromDate = fromDate;
 	}
 
+	@Column(name="TO_DATE")
 	public Date getToDate() {
 		return toDate;
 	}
@@ -102,18 +101,15 @@ public class LeaveSummary implements Serializable
 		this.toDate = toDate;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "leaveTypeId", insertable = false, updatable = false)
-	public List<LeaveType> getLeavetype() {
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "LEAVE_TYPE_ID", insertable = false, updatable = false)
+	public LeaveType getLeavetype() {
 		return leavetype;
 	}
 
-	public void setLeavetype(List<LeaveType> leavetype) {
+	public void setLeavetype(LeaveType leavetype) {
 		this.leavetype = leavetype;
 	}
 
-	private static final long serialVersionUID = 1L;
-
-
-
+	
 }

@@ -1,4 +1,4 @@
-<%@page import="java.text.SimpleDateFormat"%>
+	<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -29,7 +29,7 @@
 	<c:choose>
 		<c:when  test="${!empty leaveSummary}">
 			<tr>
-			<td>Leave Type		<c:out value="${i.leaveTypeId}"/></td>
+			<td>Leave Type		<c:out value="${i.leavetype.leaveType}"/></td>
 			<td>From Date		<c:out value="${i.fromDate}"/> </td>
 			<td>To Date			<c:out value="${i.toDate}"/> </td>
 			<td>Leave Availed	<c:out value="${i.leaveAvailed}"/> </td>
@@ -37,9 +37,9 @@
 		
 			<c:forEach items="${leaveSummary}" var="i"  varStatus="loopStatus">
 			<tr>
-			<td><c:out value="${i.leaveTypeId}"/></td>
-    		<td><c:out value="${i.fromDate}"/> </td>
-			<td><c:out value="${i.toDate}"/> </td>
+			<td><c:out value="${i.leavetype.leaveType}"/></td>
+    		<td><c:out value="${fn:substring(i.fromDate, 0, 10)}"/> </td>
+			<td><c:out value="${fn:substring(i.toDate, 0, 10)}"/> </td>
 			<td><c:out value="${i.leaveAvailed}"/> </td>
 			</tr>
 

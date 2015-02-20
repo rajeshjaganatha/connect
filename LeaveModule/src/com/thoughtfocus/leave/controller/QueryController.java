@@ -153,6 +153,8 @@ public class QueryController {
 
 			if (null==applyleave) {
 			model.addAttribute(QueryConstants.USER_ERROR_MSG, QueryConstants.ERROR_MSG_APPLY_LEAVE_FAILED);
+			}else {
+				model.addAttribute(QueryConstants.USER_ERROR_MSG, QueryConstants.ERROR_MSG_APPLY_LEAVE_SUCCESS);
 			}
 			} catch (Exception e) {
 			e.printStackTrace();
@@ -164,6 +166,7 @@ public class QueryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		map.put("queryResults", queryResult);
 		return "QueryResults";
 		

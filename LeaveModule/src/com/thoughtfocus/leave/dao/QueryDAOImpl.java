@@ -47,10 +47,34 @@ public class QueryDAOImpl implements QueryDAO
 	public List<LeaveType> searchBookmarks(){
 		List<LeaveType> leaveObjectList =new ArrayList<LeaveType>();
 			Session session=sessionFactory.getCurrentSession();
-			Criteria crit = session.createCriteria(LeaveType.class);
-
+			//Criteria crit = session.createCriteria(LeaveType.class);
+			
+			
+			Criteria criteria = session.createCriteria(LeaveType.class, "leavetype");
+			criteria.setFetchMode("leavetype.leavesummary", FetchMode.JOIN);
+			criteria.createAlias("leavetype.leavesummary", "LS");
+			
+			ProjectionList check = Projections.projectionList()
+					.add(Projections.groupProperty("leaveTypeId"),"leaveTypeId")
+					.add(Projections.groupProperty("leaveType"),"leaveType")
+					.add(Projections.groupProperty("allotment"),"allotment")
+					.add(Projections.sum("LS.leaveAvailed"),"availed");
+			criteria.setProjection(check);
+			List<Object> list = criteria.list();
+			
+			for (int i = 0; i < list.size(); i++) {
+				Object[] o = (Object[]) list.get(i);
+				LeaveType lt = new LeaveType();
+					lt.setLeaveTypeId((Integer) o[0]);
+					lt.setLeaveType((String) o[1]);
+					lt.setAllotment((Integer) o[2]);
+					lt.setAvailed(Integer.valueOf(o[3].toString()));
 					
-			leaveObjectList=(List<LeaveType>)crit.list();
+					leaveObjectList.add(lt);
+				
+			}
+			
+			
 			/*Query query = session.createQuery("SELECT DISTINCT LT.leaveTypeId,  LT.leaveType, LT.allotment,"+
 			"LT.allotment-SUM(LS.leaveAvailed) as available "+
 			"FROM LeaveType LT, LeaveSummary LS WHERE LS.leaveTypeId = LT.leaveTypeId GROUP BY LT.leaveTypeId,LT.leaveType,LT.allotment");
@@ -74,29 +98,17 @@ public class QueryDAOImpl implements QueryDAO
 	public List<LeaveSummary>  leaveSummary(User user){
 		
 		List<LeaveSummary> leavesummary =new ArrayList<LeaveSummary>();
-			Session session=sessionFactory.getCurrentSession();
-/*			Criteria crit =session.createCriteria(LeaveSummary.class);
-			crit.add(Restrictions.eq("userId", user.getUserId()));
-			leavesummary=(List<LeaveSummary>)crit.list();*/
-						
-		
-		
-		
-		
-		Criteria criteria = session.createCriteria(LeaveSummary.class, "leavesummary");
-        criteria.setFetchMode("leavesummary.user", FetchMode.JOIN);
-        criteria.createAlias("leavesummary.user", "user"); // inner join by default
- 
-        ProjectionList columns = Projections.projectionList()
+		Session session=sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(LeaveSummary.class);
+		criteria.setFetchMode("LeaveType", FetchMode.JOIN);
+		leavesummary = criteria.list();
+
+        /*ProjectionList columns = Projections.projectionList()
                         .add(Projections.property("user.userName"))
                         .add(Projections.property("leaveAvailed"));
-        criteria.setProjection(columns);
+        criteria.setProjection(columns);*/
  
-        List<Object[]> list = criteria.list();
-        for(Object[] arr : list){
-            System.out.println(Arrays.toString(arr));
-        }
-		
+        
 		
         return leavesummary;
 		
@@ -153,7 +165,7 @@ public class QueryDAOImpl implements QueryDAO
 		
 		list = (List<LeaveSummary>) criteria.list();
 		int count = list.size();
-		System.out.println(count);
+	
 		return count;
 		
 	}
