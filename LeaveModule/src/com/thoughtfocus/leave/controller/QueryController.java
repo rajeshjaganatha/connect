@@ -1,5 +1,6 @@
 package com.thoughtfocus.leave.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +23,13 @@ import com.thoughtfocus.leave.constants.QueryConstants;
 import com.thoughtfocus.leave.domain.HolidayList;
 import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
+import com.thoughtfocus.leave.domain.Projects;
+import com.thoughtfocus.leave.domain.TaskSummary;
+import com.thoughtfocus.leave.domain.Tasks;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
 import com.thoughtfocus.leave.formbean.QueryBean;
+import com.thoughtfocus.leave.formbean.TaskBean;
 import com.thoughtfocus.leave.service.QueryManager;
 import com.thoughtfocus.leave.validator.BookmarkFormValidator;
 
@@ -129,7 +134,6 @@ public class QueryController {
 		return new ModelAndView("UserLogin", "queryBean", queryBean);
 	}
 	
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/applyLeave", method=RequestMethod.POST)
 	public String applyLeave(@ModelAttribute("leaveBean") @Valid LeaveBean leaveBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
 		
@@ -163,7 +167,6 @@ public class QueryController {
 		try {
 			queryResult = queryManager.searchBookmarks();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -179,7 +182,6 @@ public class QueryController {
 		try {
 			holidaylist = queryManager.holidayList();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		map.put("holidayList", holidaylist);
@@ -194,7 +196,6 @@ public class QueryController {
 		try {
 			leavesummary = queryManager.leaveSummary(user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		map.put("leaveSummary", leavesummary);
@@ -202,4 +203,83 @@ public class QueryController {
 		
 	}
 
+	@RequestMapping(value="/timesheet", method=RequestMethod.GET)
+	public String timesheet(Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
+		List<Projects> projectList = null;
+		List<Tasks> taskList = null;
+		List<TaskSummary> taskSummary = new ArrayList<TaskSummary>();
+		User user = (User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
+		
+
+			try {
+				projectList = queryManager.projectList();
+				taskList = queryManager.taskList();
+				taskSummary=queryManager.taskSummary(user);
+				} catch (Exception e) {
+				e.printStackTrace();
+			}
+			map.put("projectList", projectList);
+			map.put("taskList", taskList);
+			map.put("taskSummary", taskSummary);
+			return "TaskManager";
+
+		
+	}
+	
+	@RequestMapping(value="/addTask", method=RequestMethod.POST)
+	public String addTask(@ModelAttribute("taskBean") @Valid TaskBean taskBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
+		System.out.println("hi");
+		List<Projects> projectList = null;
+		List<Tasks> taskList = null;
+		List<TaskSummary> taskSummary = new ArrayList<TaskSummary>();
+		User user = null;
+		try {
+			user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
+			TaskSummary addTask =  queryManager.addTask(taskBean,user);
+			if (null==addTask) {
+			model.addAttribute(QueryConstants.USER_ERROR_MSG, QueryConstants.ERROR_MSG_ADD_TASK_FAILED);
+			}else {
+				model.addAttribute(QueryConstants.USER_ERROR_MSG, QueryConstants.ERROR_MSG_ADD_TASK_SUCCESS);
+			}
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+				
+		try {
+			projectList = queryManager.projectList();
+			taskList = queryManager.taskList();
+			taskSummary=queryManager.taskSummary(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		map.put("projectList", projectList);
+		map.put("taskList", taskList);
+		map.put("taskSummary", taskSummary);
+		return "TaskManager";
+	}
+	
+	@RequestMapping(value="/calendar", method=RequestMethod.GET)
+	public String calendar(Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
+		System.out.println("hi");
+		List<TaskSummary> taskSummary = new ArrayList<TaskSummary>();
+		try{
+			User user=(User) session.getAttribute(QueryConstants.LOGGED_IN_USER);
+			taskSummary=queryManager.taskSummary(user);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		map.put("taskSummary", taskSummary);
+		return "calendar";
+
+		
+	}
+	
+	@RequestMapping(value="/calendarMonthPrintView", method=RequestMethod.GET)
+	public String calendarMonthPrintView(Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
+		System.out.println("hi2");
+		return "calendarMonthPrintView";
+
+		
+	}
 }

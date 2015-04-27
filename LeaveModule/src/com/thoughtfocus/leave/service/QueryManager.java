@@ -5,9 +5,13 @@ import java.util.List;
 import com.thoughtfocus.leave.domain.HolidayList;
 import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
+import com.thoughtfocus.leave.domain.Projects;
+import com.thoughtfocus.leave.domain.TaskSummary;
+import com.thoughtfocus.leave.domain.Tasks;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
 import com.thoughtfocus.leave.formbean.QueryBean;
+import com.thoughtfocus.leave.formbean.TaskBean;
 
 /**
  * The service interface for bookmark
@@ -31,6 +35,13 @@ public interface QueryManager {
 	
 	public List<LeaveSummary> leaveSummary(User user) throws Exception;
 
+	public List<Projects> projectList() throws Exception;
+	
+	public List<Tasks> taskList() throws Exception;
+
+	public TaskSummary addTask(TaskBean taskBean, User user) throws Exception;
+
+	public List<TaskSummary> taskSummary(User user);
 
 
 }

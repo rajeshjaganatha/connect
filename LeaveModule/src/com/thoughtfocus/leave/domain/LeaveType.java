@@ -1,7 +1,6 @@
 package com.thoughtfocus.leave.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Column;

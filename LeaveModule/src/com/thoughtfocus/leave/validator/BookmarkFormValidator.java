@@ -44,7 +44,6 @@ public class BookmarkFormValidator implements Validator
 
 	@Override
 	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

@@ -11,15 +11,14 @@ import com.thoughtfocus.leave.dao.QueryDAO;
 import com.thoughtfocus.leave.domain.HolidayList;
 import com.thoughtfocus.leave.domain.LeaveSummary;
 import com.thoughtfocus.leave.domain.LeaveType;
+import com.thoughtfocus.leave.domain.Projects;
+import com.thoughtfocus.leave.domain.TaskSummary;
+import com.thoughtfocus.leave.domain.Tasks;
 import com.thoughtfocus.leave.domain.User;
 import com.thoughtfocus.leave.formbean.LeaveBean;
 import com.thoughtfocus.leave.formbean.QueryBean;
+import com.thoughtfocus.leave.formbean.TaskBean;
 
-/**
- * The service layer for bookmark operations
- * @author manaswita.mishra
- *
- */
 @Service("queryManager")
 public class QueryManagerImpl implements QueryManager{
 	
@@ -49,14 +48,12 @@ public class QueryManagerImpl implements QueryManager{
 	public User validateUser(QueryBean queryBean) throws Exception{
 		User user=queryDAO.validateUser(queryBean);
 		return user;
-		
 	}
 	
 	@Override
 	public LeaveSummary applyLeave (LeaveBean leaveBean, User user) throws Exception{
 		LeaveSummary addLeave=queryDAO.applyLeave(leaveBean, user);
 		return addLeave;
-		
 	}
 
 	@Override
@@ -64,7 +61,32 @@ public class QueryManagerImpl implements QueryManager{
 		List<LeaveSummary> leavesummary = new ArrayList<LeaveSummary>();
 		leavesummary=queryDAO.leaveSummary(user);
 		return leavesummary;		
-		
 	}
 
+	@Override
+	public List<Projects> projectList() throws Exception {
+		List<Projects> projectList = new ArrayList<Projects>();
+		projectList=queryDAO.projectList();
+		return projectList;		
+	}
+	
+	@Override
+	public List<Tasks> taskList() throws Exception {
+		List<Tasks> taskList = new ArrayList<Tasks>();
+		taskList=queryDAO.taskList();
+		return taskList;		
+	}
+
+	@Override
+	public TaskSummary addTask(TaskBean taskBean, User user) throws Exception {
+		TaskSummary addTask=queryDAO.addTask(taskBean, user);
+		return addTask;
+	}
+
+	@Override
+	public List<TaskSummary> taskSummary(User user) {
+		List<TaskSummary> taskSummary = new ArrayList<TaskSummary>();
+		taskSummary=queryDAO.taskSummary(user);
+		return taskSummary;		
+	}
 }

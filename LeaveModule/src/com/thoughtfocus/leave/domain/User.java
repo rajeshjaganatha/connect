@@ -1,13 +1,7 @@
 package com.thoughtfocus.leave.domain;
 
 import java.io.Serializable;
-import java.util.*;
-
 import javax.persistence.*;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 /**
  * The User domain object to represent one user

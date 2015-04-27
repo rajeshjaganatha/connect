@@ -15,6 +15,7 @@ public class QueryConstants {
 	public static final String ERROR_MSG_LOGIN_FAILED_1="Sorry!!!";
 	public static final String ERROR_MSG_APPLY_LEAVE_FAILED="Leave(s) already applied for given dates";
 	public static final String ERROR_MSG_APPLY_LEAVE_SUCCESS="Leave(s) applied successfully";
-	
+	public static final String ERROR_MSG_ADD_TASK_FAILED = "Task(s) already applied for given project and date";
+	public static final String ERROR_MSG_ADD_TASK_SUCCESS = "Task(s) applied successfully";
 
 }

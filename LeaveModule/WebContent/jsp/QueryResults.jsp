@@ -62,8 +62,13 @@ function getSubmitLeaveReport(){
 	<a href="#" title="holidaylist"
 		onclick="javascript:go('holidaylist.do');" class="button_example">HOLIDAY
 		LIST</a>
-	<a href="#" title="holidaylist"
+	<a href="#" title="leavesummary"
 		onclick="javascript:go('leavesummary.do');" class="button_example">LEAVE SUMMARY</a>
+	<a href="#" title="timesheet"
+		onclick="javascript:go('timesheet.do');" class="button_example">TIME SHEET</a>
+	<a href="#" title="calendar"
+		onclick="javascript:go('calendar.do');" class="button_example">CALENDAR</a>
+
 
 	<br>
 	<br>
@@ -192,7 +197,7 @@ function getSubmitLeaveReport(){
 		</tbody>
 		<tbody id="calender"></tbody>
 	</table>
-	<td><form:errors path="document_number" cssClass="error" /></td>
+	<form:errors path="document_number" cssClass="error" />
 	<!-- End Calender Script  -->
 
 

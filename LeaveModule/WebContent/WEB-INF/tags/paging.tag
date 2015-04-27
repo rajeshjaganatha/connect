@@ -6,6 +6,7 @@
 <link href="css/pagination.css" rel="stylesheet" type="text/css"/>
 
 <c:if test="${pagedListHolder.pageCount > 1}">
+
     <c:if test="${!pagedListHolder.firstPage}">
         <span class="pagingItem"><a href="<%= StringUtils.replace(pagedLink, "~", String.valueOf(pagedListHolder.getPage()-1)) %>">&lt;</a></span>
     </c:if>

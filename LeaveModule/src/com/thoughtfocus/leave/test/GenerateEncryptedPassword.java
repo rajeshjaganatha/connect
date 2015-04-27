@@ -21,7 +21,6 @@ public class GenerateEncryptedPassword {
 		try {
 			System.out.println(encrypt(password));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

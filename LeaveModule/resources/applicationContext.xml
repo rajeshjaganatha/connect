@@ -60,6 +60,9 @@
 				<value>com.thoughtfocus.leave.domain.LeaveType</value>
 				<value>com.thoughtfocus.leave.domain.HolidayList</value>
 				<value>com.thoughtfocus.leave.domain.LeaveSummary</value>
+				<value>com.thoughtfocus.leave.domain.Projects</value>
+				<value>com.thoughtfocus.leave.domain.Tasks</value>
+				<value>com.thoughtfocus.leave.domain.TaskSummary</value>
 			</list>
 </property> 
 	</bean>
