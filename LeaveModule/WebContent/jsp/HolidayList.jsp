@@ -29,7 +29,7 @@
 			<tr>
 			<td>Serial Number 	<c:out value="${i.holidayId}"/></td>
 			<td>Holiday Name	<c:out value="${i.holidayName}"/></td>
-			<td>Date			<c:out value="${i.date}"/> </td>
+			<td>Date			<c:out value="${fn:substring(i.date,0,10)}"/> </td>
 			<td>Day				<c:out value="${i.day}"/> </td>
 			</tr>		
 		
@@ -37,7 +37,7 @@
 			<tr>
 			<td><c:out value="${i.holidayId}"/></td>
 			<td><c:out value="${i.holidayName}"/></td>
-			<td><c:out value="${i.date}"/> </td>
+			<td><c:out value="${fn:substring(i.date,0,10)}"/> </td>
 			<td><c:out value="${i.day}"/> </td>
 			</tr>
 

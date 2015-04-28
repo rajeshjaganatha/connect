@@ -12,6 +12,10 @@ body#regular_page #calendar_main_div {
   padding-top: 60px;
 }
 
+#calendar_main_div{
+	
+}
+
 #calendar_print_view_main_div {
 }
 
@@ -19,7 +23,7 @@ body#regular_page #calendar_main_div {
 	text-align: center;
 	color: black;
 	font-style: italic;
-	height: 5;
+
 }
 
 body#regular_page .month_year_header {
@@ -37,14 +41,12 @@ body#print_view_page td.day_cell {
 
 #calendar_table {
   border-style: solid;
-  margin-left: 50;
-  margin-right: 50;
+
 }
 
 #calendar_nav_table {
   padding-top: 1.5em;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 
 td#prev_link, td#next_link, td#link_to_month_view {
@@ -53,7 +55,7 @@ td#prev_link, td#next_link, td#link_to_month_view {
 
 #prev_link {
   text-align: left;
-}
+ }
 
 #link_to_month_view {
   text-align: center;
@@ -78,19 +80,19 @@ td#prev_link, td#next_link, td#link_to_month_view {
 .th_day_cell {
 }
 
-body#regular_page .day_cell, .empty_day_cell, .today_cell {
+body#regular_page, .day_cell, .empty_day_cell, .today_cell {
   text-align: center;
   vertical-align: top;
 }
 
-body#print_view_page .day_cell, .empty_day_cell {
+body#print_view_page  {
   text-align: center;
   vertical-align: top;
 }
 
 .day_cell{
-	width: 75;
-	height: 75;
+	width: 125px;
+	height: 100px;
 }
 
 .empty_day_cell {
@@ -120,6 +122,7 @@ body#print_view_page .day_cell, .empty_day_cell {
 
 #day_tasks, #today_tasks{
 	width: 100%;
+	border: 2px;
 }
 
 

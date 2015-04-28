@@ -66,9 +66,6 @@ function getSubmitLeaveReport(){
 		onclick="javascript:go('leavesummary.do');" class="button_example">LEAVE SUMMARY</a>
 	<a href="#" title="timesheet"
 		onclick="javascript:go('timesheet.do');" class="button_example">TIME SHEET</a>
-	<a href="#" title="calendar"
-		onclick="javascript:go('calendar.do');" class="button_example">CALENDAR</a>
-
 
 	<br>
 	<br>

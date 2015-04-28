@@ -30,7 +30,6 @@ function getTask(){
 				var taskId = document.getElementById("taskId").value;
 				var taskDesc = document.getElementById("taskDesc").value;
 				
-				alert(projectId+"|"+date+"|"+hours+"|"+taskDesc+"|"+taskId);
 				if(projectId == "selectProject"){
 					alert("Please Select the Project");
 					return false;
@@ -58,7 +57,7 @@ function getTask(){
 	<div class="title">Leave</div>
 	<a href="#" title="LogOut" onclick="javascript:go('logout.do');"
 		class="button_example">LOGOUT</a>
-		<a href="javascript:history.go(-1)">Go Back</a>
+		<a href="javascript:go('home.do');">Go Back</a>
 
 	<form:form action="addTask.do" method="post"
 		commandName="BookmarkList" modelAttribute="taskBean">
@@ -162,9 +161,23 @@ function getTask(){
 <div id="calendar_main_div">
 <table border="1" id="calendar_table">
   <tr>
-    <td width="50%" colspan="9" class="month_year_header">
+  <td rowspan="10" id="prev_link" >
+      <form method="get" >
+        <input style="height: 600px;" type="submit" name="PREV" value=" << ">
+        <input type="hidden" name="month" value="<%=prevMonth%>">
+        <input type="hidden" name="year" value="<%=prevYear%>">
+      </form>
+ </td>
+    <td colspan="9" class="month_year_header">
       <%=monthName%>, <%=intYear%>
    </td>
+           <td rowspan="10" id="next_link" >
+      <form method="get">
+        <input style="height: 600px;" type="submit" name="NEXT" value=" >> ">
+        <input type="hidden" name="month" value="<%=nextMonth%>">
+        <input type="hidden" name="year" value="<%=nextYear%>">
+      </form>
+    </td>
   </tr>
  
   <tr class="week_header_row" >
@@ -175,6 +188,7 @@ function getTask(){
     <th class="th_day_cell day">Thu</th>
     <th class="th_day_cell day">Fri</th>
     <th class="th_day_cell day">Sat</th>
+
   </tr>
 <% {Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
   	int [][] days = aMonth.getDays();
@@ -204,7 +218,7 @@ function getTask(){
     		
 	<c:set var="tempd" scope="session" value="<%=tempDate%>"/>
     <td class="today_cell" ><%=days[i][j]%>
-    <table id="today_tasks" border="1" style="border:2px;">
+    <table id="today_tasks" border="1" >
  	<c:forEach items="${taskSummary}" var="i" varStatus="loopStatus">
   	<c:if test="${fn:substring(i.taskDate,0,10) eq tempd}">
   	<tr>
@@ -226,7 +240,7 @@ function getTask(){
     		tempDate2 = parser.format(date);%>
 	<c:set var="tempd2" scope="session" value="<%=tempDate2%>"/>
     <td class="day_cell"><%=days[i][j]%>
-    <table id="day_tasks" border="1" style="border:2px;">
+    <table id="day_tasks" border="1" >
   	<c:forEach items="${taskSummary}" var="i" varStatus="loopStatus">
 	<c:if test="${fn:substring(i.taskDate,0,10) == fn:substring(tempd2,0,10) }">
   	<tr>
@@ -245,42 +259,19 @@ function getTask(){
   <%}
 }
 %>
-</table>
-
-<%-- end of "calendar_div" --%>
-</div>
-
-<!-- navigation links -->
-<%-- sorry, i don't know how to get this look without a table --%>
-<table id="calendar_nav_table" >
-  <tr>
-    <td id="prev_link">
-      <form method="post" >
-        <input type="submit" name="PREV" value=" << ">
-        <input type="hidden" name="month" value="<%=prevMonth%>">
-        <input type="hidden" name="year" value="<%=prevYear%>">
-      </form>
-    </td>
-    <td id="link_to_month_view">
-      <form action="calendarMonthPrintView.do" method="post">
-        <input type="submit" value="  Full-Screen Print View  " class="submit_button">
+ <tr>
+    <td colspan="7" id="link_to_month_view">
+      <form action="calendarMonthPrintView.do" method="get">
+        <input style="width: 850px;" type="submit" value="  Full-Screen Print View  " class="submit_button">
         <input type="hidden" name="month" value="<%=intMonth%>">
         <input type="hidden" name="year"  value="<%=intYear%>">
       </form>
     </td>
-    <td id="next_link">
-      <form method="post">
-        <input type="submit" name="NEXT" value=" >> ">
-        <input type="hidden" name="month" value="<%=nextMonth%>">
-        <input type="hidden" name="year" value="<%=nextYear%>">
-      </form>
-    </td>
   </tr>
+
 </table>
-  <!-- navigation links end -->
-  
 
-
-
+<%-- end of "calendar_div" --%>
+</div>
 </body>
 </html>

@@ -121,6 +121,8 @@ public class QueryController {
 
 	}
     
+    
+    
     /**
 	 * Logout user
 	 * @param request
@@ -202,6 +204,22 @@ public class QueryController {
 		return "LeaveSummary";
 		
 	}
+	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String home(@ModelAttribute("taskBean") @Valid TaskBean taskBean,final BindingResult result,Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
+		List<LeaveType> queryResult = null;
+		
+	
+			
+			try {
+				queryResult = queryManager.searchBookmarks();
+				} catch (Exception e) {
+				e.printStackTrace();
+			}
+			map.put("queryResults", queryResult);
+			return "QueryResults";
+		}
+		
 
 	@RequestMapping(value="/timesheet", method=RequestMethod.GET)
 	public String timesheet(Map<String, Object> map,HttpSession session,HttpServletRequest req,Model model){
