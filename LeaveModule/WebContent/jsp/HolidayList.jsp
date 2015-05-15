@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div class="title">Holiday List</div>
+<div class="title">HOLIDAY LIST</div>
 
 <a href="#" title="LogOut" onclick="javascript:go('logout.do');" class="button_example">LOGOUT</a>
 <a href="javascript:history.go(-1)">Go Back</a>

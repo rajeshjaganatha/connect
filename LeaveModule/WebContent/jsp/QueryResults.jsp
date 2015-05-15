@@ -17,10 +17,6 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="css/calendar.css" rel="stylesheet" type="text/css">
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
-
-
 </head>
 
 <script type="text/javascript">
@@ -41,21 +37,12 @@ function getSubmitLeaveReport(){
 				else{
 					document.forms[0].action="applyLeave.do";
 					document.forms[0].submit();
-					
 				}
-				
-
 }
-
 </script>
 
-
-
 <body>
-
-
-
-	<div class="title">Leave</div>
+	<div class="title">LEAVE</div>
 
 	<a href="#" title="LogOut" onclick="javascript:go('logout.do');"
 		class="button_example">LOGOUT</a>
@@ -63,9 +50,10 @@ function getSubmitLeaveReport(){
 		onclick="javascript:go('holidaylist.do');" class="button_example">HOLIDAY
 		LIST</a>
 	<a href="#" title="leavesummary"
-		onclick="javascript:go('leavesummary.do');" class="button_example">LEAVE SUMMARY</a>
-	<a href="#" title="timesheet"
-		onclick="javascript:go('timesheet.do');" class="button_example">TIME SHEET</a>
+		onclick="javascript:go('leavesummary.do');" class="button_example">LEAVE
+		SUMMARY</a>
+	<a href="#" title="home" onclick="javascript:go('timesheet.do');"
+		class="button_example">HOME</a>
 
 	<br>
 	<br>
@@ -73,11 +61,12 @@ function getSubmitLeaveReport(){
 		<c:choose>
 			<c:when test="${!empty queryResults}">
 				<tr>
-					<td>Serial Number	 <c:out value="${i.leaveTypeId}" /></td>
-					<td>Leave Type		 <c:out value="${i.leaveType}" /></td>
-					<td>Allotment		 <c:out value="${i.allotment}" /></td>
-					<td>Availed			 <c:out value="${i.availed}"/> </td>
-			<%--<td>Available		<c:out value="${i.available}"/> </td> --%>
+					<td>Serial Number <c:out value="${i.leaveTypeId}" /></td>
+					<td>Leave Type <c:out value="${i.leaveType}" /></td>
+					<td>Allotment <c:out value="${i.allotment}" /></td>
+					<td>Availed <c:out value="${i.availed}" />
+					</td>
+					<%--<td>Available		<c:out value="${i.available}"/> </td> --%>
 				</tr>
 
 				<c:forEach items="${queryResults}" var="i" varStatus="loopStatus">
@@ -85,8 +74,8 @@ function getSubmitLeaveReport(){
 						<td><c:out value="${i.leaveTypeId}" /></td>
 						<td><c:out value="${i.leaveType}" /></td>
 						<td><c:out value="${i.allotment}" /></td>
-						<td><c:out value="${i.availed}"/> </td>
-			<%-- <td><c:out value="${i.available}"/> </td> --%>
+						<td><c:out value="${i.availed}" /></td>
+						<%-- <td><c:out value="${i.available}"/> </td> --%>
 					</tr>
 
 				</c:forEach>
@@ -100,9 +89,6 @@ function getSubmitLeaveReport(){
 	</table>
 
 	<br>
-	<br>
-
-
 	<form:form action="applyLeave.do" method="post"
 		commandName="BookmarkList" modelAttribute="leaveBean">
 		<table>
@@ -140,6 +126,7 @@ function getSubmitLeaveReport(){
 					readonly="readonly" style="background: silver; z-index: 5;">
 					<div class="label" id="halfDayImage"></div></td>
 			</tr>
+			
 			<tr>
 				<td><input type="button" onclick="getSubmitLeaveReport();"
 					title="Submit" value="APPLY LEAVE" class="button_example" /></td>

@@ -54,11 +54,19 @@ function getTask(){
 
 </script>
 <body>
-	<div class="title">Leave</div>
+	<div class="title">TIME SHEET</div>
 	<a href="#" title="LogOut" onclick="javascript:go('logout.do');"
 		class="button_example">LOGOUT</a>
-		<a href="javascript:go('home.do');">Go Back</a>
-
+	<a href="#" title="holidaylist"
+		onclick="javascript:go('holidaylist.do');" class="button_example">HOLIDAY
+		LIST</a>
+	<a href="#" title="leave"
+		onclick="javascript:go('leave.do');" class="button_example">LEAVE</a>
+		
+		
+<br>
+<br>
+	
 	<form:form action="addTask.do" method="post"
 		commandName="BookmarkList" modelAttribute="taskBean">
 		<table>
@@ -162,7 +170,7 @@ function getTask(){
 <table border="1" id="calendar_table">
   <tr>
   <td rowspan="10" id="prev_link" >
-      <form method="get" >
+      <form method="get" action="timesheet.do">
         <input style="height: 600px;" type="submit" name="PREV" value=" << ">
         <input type="hidden" name="month" value="<%=prevMonth%>">
         <input type="hidden" name="year" value="<%=prevYear%>">
@@ -172,7 +180,7 @@ function getTask(){
       <%=monthName%>, <%=intYear%>
    </td>
            <td rowspan="10" id="next_link" >
-      <form method="get">
+      <form method="get" action="timesheet.do">
         <input style="height: 600px;" type="submit" name="NEXT" value=" >> ">
         <input type="hidden" name="month" value="<%=nextMonth%>">
         <input type="hidden" name="year" value="<%=nextYear%>">

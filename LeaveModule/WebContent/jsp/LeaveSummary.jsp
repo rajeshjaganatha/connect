@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<div class="title">Leave Summary</div>
+<div class="title">LEAVE SUMMARY</div>
 
 <a href="#" title="LogOut" onclick="javascript:go('logout.do');" class="button_example">LOGOUT</a>
 <a href="javascript:history.go(-1)">Go Back</a>
